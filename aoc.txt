@@ -1,0 +1,119 @@
+
+100 rem *** advent  of  code  ***
+110 rem *** december 11, 2021 ***
+130 rem
+140 rem adventofcode.com/2021/day/11
+150 rem
+160 rem by norbert kehrer
+170 rem norbertkehrer.github.io
+180 rem
+
+200 print
+210 print "advent of code on december 11, 2021"
+220 print "==================================="
+230 print
+240 ti$="000000"
+
+500 dim en(10,10):rem energy
+510 dim hf(10,10):rem has flashed
+520 dim st(300):rem stack
+530 sp = 1:rem stack pointer
+540 dim rs(300):rem return stack
+550 s1=0:rem return stack pointer
+
+1000 for i=1 to 10
+1010 for j=1 to 10
+1020 read en(i,j)
+1030 next j
+1040 next i
+
+2000 s=1
+2010 rem print "step ";s
+2020 gosub 10000:rem clear has_flashed array
+2030 for i=1 to 10
+2040 for j=1 to 10
+2050 r=i:c=j:rp=2060:goto 20000:rem process cell
+2060 next j
+2070 next i
+2070 if s=100 then print "part 1: nr. of flashes is ";nf
+2080 gosub 40000:rem check if all energies are zero
+2090 if ze=0 then s=s+1:goto 2010
+2100 print "part 2: all flash at step ";s
+2200 print
+2210 print "time needed (hours:minutes): ";left$(ti$,2);":";mid$(ti$,3,2)
+2220 print
+2230 print "norbert kehrer"
+2240 print "github.com/norbertkehrer/aoc-dec-11-2021"
+3000 end
+
+10000 rem *** clear has_flashed array
+10010 for ii=1 to 10
+10020 for jj=1 to 10
+10030 hf(ii,jj) = 0
+10040 next jj
+10050 next ii
+10060 return
+
+20000 rem *** process cell: input r, c (and rp)
+20010 if r<1 then 20210
+20020 if c<1 then 20210
+20030 if r>10 then 20210
+20040 if c>10 then 20210
+20050 if hf(r,c)=1 then 20210
+20060 e=en(r,c)+1
+20070 en(r,c)=e
+20080 if e<10 then 20210
+20090 nf=nf+1
+20100 hf(r,c)=1
+20110 en(r,c)=0
+20115 s1=s1+1:rs(s1)=rp:rem push rp
+20120 gosub 30000:r=r-1:c=c-1:rp=20130:goto 20000
+20130 gosub 30100:gosub 30000:r=r-1:c=c-0:rp=20140:goto 20000
+20140 gosub 30100:gosub 30000:r=r-1:c=c+1:rp=20150:goto 20000
+20150 gosub 30100:gosub 30000:r=r-0:c=c-1:rp=20160:goto 20000
+20160 gosub 30100:gosub 30000:r=r-0:c=c+1:rp=20170:goto 20000
+20170 gosub 30100:gosub 30000:r=r+1:c=c-1:rp=20180:goto 20000
+20180 gosub 30100:gosub 30000:r=r+1:c=c-0:rp=20190:goto 20000
+20190 gosub 30100:gosub 30000:r=r+1:c=c+1:rp=20200:goto 20000
+20200 gosub 30100:rp=rs(s1):s1=s1-1:rem pop rp
+20210 if rp=2060 then 2060
+20220 if rp=20130 then 20130
+20230 if rp=20140 then 20140
+20240 if rp=20150 then 20150
+20250 if rp=20160 then 20160
+20260 if rp=20170 then 20170
+20270 if rp=20180 then 20180
+20280 if rp=20190 then 20190
+20290 if rp=20200 then 20200
+20300 print "stack error":stop
+
+30000 rem *** push r,c
+30010 st(sp+1)=r:st(sp+2)=c
+30020 sp=sp+2
+30030 return
+
+30100 rem *** pop r,c
+30110 c=st(sp):r=st(sp-1)
+30120 sp=sp-2
+30130 return
+
+40000 rem *** check if all energies are zero
+40010 for ii=1 to 10
+40020 for jj=1 to 10
+40030 if en(ii,jj)>0 then ze=0:return
+40040 next jj
+40050 next ii
+40060 ze=1
+40070 return
+
+49990 rem insert your data set here
+50000 data 5,4,8,3,1,4,3,2,2,3
+50010 data 2,7,4,5,8,5,4,7,1,1
+50020 data 5,2,6,4,5,5,6,1,7,3
+50030 data 6,1,4,1,3,3,6,1,4,6
+50040 data 6,3,5,7,3,8,5,4,7,8
+50050 data 4,1,6,7,5,2,4,6,4,5
+50060 data 2,1,7,6,8,4,1,7,2,1
+50070 data 6,8,8,2,8,8,1,1,3,4
+50080 data 4,8,4,6,8,4,8,5,5,4
+50090 data 5,2,8,3,7,5,1,5,2,6
