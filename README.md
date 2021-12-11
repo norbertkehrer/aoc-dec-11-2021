@@ -7,7 +7,8 @@ The Basic source code is in the file "aoc.txt". The executable binary is in "aoc
 
 Be patient, because the program runs about 1 hour and 20 minutes to solve both parts of the puzzle.
 
-Screen shot: 
+Here is a screen shot:
+
 ![Advent of Code, Dec 11, 2021 on the C64](https://github.com/norbertkehrer/aoc-dec-11-2021/blob/main/c64_aoc_dec_11_2021.PNG "Advent of Code, Dec 11, 2021 on the C64")
 
 Have fun.
