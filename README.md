@@ -5,6 +5,9 @@ The puzzle is here: https://adventofcode.com/2021/day/11
 
 Be patient, because the program runs about 1 hour and 20 minutes to solve both parts of the puzzle.
 
+Screen shot: 
+![Advent of Code, Dec 11, 2021 on the C64](https://github.com/norbertkehrer/aoc-dec-11-2021/c64_aoc_dec_11_2021.png"Advent of Code, Dec 11, 2021 on the C64")
+
 Have fun.
 
 Norbert
